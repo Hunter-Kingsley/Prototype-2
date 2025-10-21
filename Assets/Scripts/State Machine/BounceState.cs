@@ -15,6 +15,7 @@ public class BounceState : MovementBaseState
     public override void UpdateState(MovementManager player)
     {
         // Bounce state logic
+        player.
     }
 
     public override void FixedUpdateState(MovementManager player)
