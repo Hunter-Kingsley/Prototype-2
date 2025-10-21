@@ -16,6 +16,7 @@ public class IdleState : MovementBaseState
 
     public override void UpdateState(MovementManager player)
     {
+
         // Idle state logic
         if (player.moveDirection != Vector2.zero)
         {
@@ -26,6 +27,14 @@ public class IdleState : MovementBaseState
     public override void FixedUpdateState(MovementManager player)
     {
         // Idle physics logic
+        // apply gravity
+        player.rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
+        Debug.Log(player.rb.linearVelocity.y);
+
+        if (player.rb.linearVelocity.y < maxGravity)
+        {
+            player.rb.linearVelocity = new Vector3(0, maxGravity, 0);
+        }
     }
 
     public override void OnCollisionEnter(MovementManager player)
