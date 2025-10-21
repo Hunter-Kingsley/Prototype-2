@@ -15,6 +15,7 @@ public class MovementManager : MonoBehaviour
 
     // Player controls
     public InputAction playerControls;
+    public InputAction playerBounce;
     public Vector2 moveDirection = Vector2.zero;
     public float moveSpeed = 5f;
 
@@ -22,10 +23,12 @@ public class MovementManager : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        playerBounce.Enable();
     }
     private void OnDisable()
     {
         playerControls.Disable();
+        playerBounce.Disable();
     }
 
     // Start is called before the first frame update

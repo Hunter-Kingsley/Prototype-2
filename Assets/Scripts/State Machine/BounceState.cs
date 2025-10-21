@@ -8,6 +8,8 @@ public class BounceState : MovementBaseState
     public override void EnterState(MovementManager player)
     {
         Debug.Log("Entering Bounce State");
+
+        player.rb.AddForce(new Vector3(0, bounceStrength, 0), ForceMode.Impulse);
     }
 
     public override void UpdateState(MovementManager player)

@@ -17,6 +17,11 @@ public class IdleState : MovementBaseState
     public override void UpdateState(MovementManager player)
     {
 
+        if (player.playerBounce.IsPressed())
+        {
+            player.SwitchState(player.bounceState);
+        }
+
         // Idle state logic
         if (player.moveDirection != Vector2.zero)
         {

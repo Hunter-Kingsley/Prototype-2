@@ -17,6 +17,11 @@ public class MoveState : MovementBaseState
         {
             player.SwitchState(player.idleState);
         }
+
+        if (player.playerBounce.IsPressed())
+        {
+            player.SwitchState(player.bounceState);
+        }
     }
 
     public override void FixedUpdateState(MovementManager player)
