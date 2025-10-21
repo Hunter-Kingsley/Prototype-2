@@ -10,8 +10,8 @@ public class IdleState : MovementBaseState
         Debug.Log("Entering Idle State");
 
         // Stop player movement
-        player.rb.linearVelocity = Vector3.zero;
-        player.rb.angularVelocity = Vector3.zero;
+        player.rb.linearVelocity = new Vector3(0, player.rb.linearVelocity.y, 0);
+        player.rb.angularVelocity = new Vector3(0, player.rb.angularVelocity.y, 0);
     }
 
     public override void UpdateState(MovementManager player)
@@ -32,14 +32,6 @@ public class IdleState : MovementBaseState
     public override void FixedUpdateState(MovementManager player)
     {
         // Idle physics logic
-        // apply gravity
-        player.rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
-        Debug.Log(player.rb.linearVelocity.y);
-
-        if (player.rb.linearVelocity.y < maxGravity)
-        {
-            player.rb.linearVelocity = new Vector3(0, maxGravity, 0);
-        }
     }
 
     public override void OnCollisionEnter(MovementManager player)

@@ -18,6 +18,11 @@ public class MovementManager : MonoBehaviour
     public InputAction playerBounce;
     public Vector2 moveDirection = Vector2.zero;
     public float moveSpeed = 5f;
+    public float gravityValue = -5.0f;
+    public float maxGravity = -7.0f;
+    public float bounceStrength = 5.0f;
+    public float bounceCooldown = 0.25f;
+    public float bounceTimer = 0.0f;
 
     // Enable/Disable player controls
     private void OnEnable()
@@ -42,14 +47,28 @@ public class MovementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (bounceTimer < bounceCooldown)
+        {
+            bounceTimer += Time.deltaTime;
+        }
+
         moveDirection = playerControls.ReadValue<Vector2>();
-        currentState.UpdateState(this);
+       currentState.UpdateState(this);
     }
 
     void FixedUpdate()
     {
         // You can add physics-related state updates here if needed
         currentState.FixedUpdateState(this);
+
+        // apply gravity
+        rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
+        //Debug.Log(rb.linearVelocity.y);
+
+        if (rb.linearVelocity.y < maxGravity)
+        {
+            rb.linearVelocity = new Vector3(0, maxGravity, 0);
+        }
     }
 
     // Transsition to a new state
