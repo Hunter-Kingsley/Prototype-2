@@ -7,7 +7,7 @@ public class DashState : MovementBaseState
 
     public override void EnterState(MovementManager player)
     {
-        Debug.Log("Entering Dash State");
+        //Debug.Log("Entering Dash State");
     }
 
     public override void UpdateState(MovementManager player)

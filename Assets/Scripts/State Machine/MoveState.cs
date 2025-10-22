@@ -7,7 +7,7 @@ public class MoveState : MovementBaseState
 
     public override void EnterState(MovementManager player)
     {
-        Debug.Log("Entering Move State");
+        //Debug.Log("Entering Move State");
     }
 
     public override void UpdateState(MovementManager player)

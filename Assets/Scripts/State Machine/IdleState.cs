@@ -7,7 +7,7 @@ public class IdleState : MovementBaseState
 
     public override void EnterState(MovementManager player)
     {
-        Debug.Log("Entering Idle State");
+        //Debug.Log("Entering Idle State");
 
         // Stop player movement
         player.rb.linearVelocity = new Vector3(0, player.rb.linearVelocity.y, 0);

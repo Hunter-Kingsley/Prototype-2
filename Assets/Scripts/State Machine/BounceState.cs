@@ -7,7 +7,8 @@ public class BounceState : MovementBaseState
 
     public override void EnterState(MovementManager player)
     {
-        Debug.Log("Entering Bounce State");
+        //Debug.Log("Entering Bounce State");
+
         if (player.bounceTimer > player.bounceCooldown)
         {
             player.rb.linearVelocity = (new Vector3(0, player.bounceStrength, 0));
