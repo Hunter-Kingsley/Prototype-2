@@ -10,6 +10,12 @@ public class CoinJuice : MonoBehaviour
     public float speed;
     private Vector3 startPosition;
 
+    AudioManager audioManager;
+
+    private void Awake(){
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start() {
         startPosition = transform.position;
     }
@@ -34,6 +40,7 @@ public class CoinJuice : MonoBehaviour
         if (other.tag == "Player")
         {
             Destroy(this.gameObject);
+            audioManager.PlaySFX(audioManager.collect);
         }
     }
 }

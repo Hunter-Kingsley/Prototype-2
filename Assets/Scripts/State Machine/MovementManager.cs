@@ -122,7 +122,7 @@ public class MovementManager : MonoBehaviour
         }*/
     }
 
-    // Transsition to a new state
+    // Transition to a new state
     public void SwitchState(MovementBaseState state)
     {
         currentState = state;

@@ -3,6 +3,13 @@ using UnityEngine.InputSystem;
 
 public class MoveState : MovementBaseState
 {
+    
+    AudioManager audioManager;
+
+    private void Awake(){
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     public MovementManager player;
 
     public override void EnterState(MovementManager player)
@@ -21,6 +28,7 @@ public class MoveState : MovementBaseState
         if (player.dashing > 0)
         {
             player.SwitchState(player.dashState);
+            audioManager.PlaySFX(audioManager.dash);
         }
 
         if (player.dashMult > player.dashFloor)
