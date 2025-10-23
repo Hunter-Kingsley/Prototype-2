@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MovementManager : MonoBehaviour
 {
@@ -13,27 +14,50 @@ public class MovementManager : MonoBehaviour
     // Player components
     public Rigidbody rb;
 
+    // Camera components
+    [SerializeField] private Transform cameraTransform;
+
     // Player controls
-    public InputAction playerControls;
-    public InputAction playerBounce;
-    public Vector2 moveDirection = Vector2.zero;
-    public float moveSpeed = 5f;
-    public float gravityValue = -5.0f;
-    public float maxGravity = -7.0f;
-    public float bounceStrength = 5.0f;
-    public float bounceCooldown = 0.25f;
-    public float bounceTimer = 0.0f;
+    public InputActionAsset inputActions;
+    private InputActionMap playerActionMap;
+    private InputAction moveAction;
+    private InputAction dashAction;
+    //private InputAction playerBounce;
+
+    // Get UI Elements
+    public GameObject dashUI;
+    public Image dashBar;
+
+    public Vector3 moveDirection = Vector3.zero;
+    public float dashing = 0f;
+    public float dashMult = 1f;
+    public float dashFloor = 1f;
+    public float dashCeiling = 10f;
+    public float dashChargeSpeed = 5f;
+    public float dashSlowdown = .5f;
+    public float horizontalMoveSpeed = 5f;
+    public float verticalMoveSpeed = 5f;
+    //public float gravityValue = -5.0f;
+    //public float maxGravity = -7.0f;
+    //public float bounceStrength = 5.0f;
+    //public float bounceCooldown = 0.25f;
+    //public float bounceTimer = 0.0f;
+
+    void Awake()
+    {
+        playerActionMap = inputActions.FindActionMap("Player");
+        moveAction = playerActionMap.FindAction("Move");
+        dashAction = playerActionMap.FindAction("Dash");
+    }
 
     // Enable/Disable player controls
     private void OnEnable()
     {
-        playerControls.Enable();
-        playerBounce.Enable();
+        playerActionMap.Enable();
     }
     private void OnDisable()
     {
-        playerControls.Disable();
-        playerBounce.Disable();
+        playerActionMap.Disable();
     }
 
     // Start is called before the first frame update
@@ -47,13 +71,29 @@ public class MovementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bounceTimer < bounceCooldown)
+        /*if (bounceTimer < bounceCooldown)
         {
             bounceTimer += Time.deltaTime;
-        }
+        }*/
 
-        moveDirection = playerControls.ReadValue<Vector2>();
-       currentState.UpdateState(this);
+        // Get control inputs
+        moveDirection = moveAction.ReadValue<Vector3>();
+        moveDirection = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * moveDirection;
+        dashing = dashAction.ReadValue<float>();
+
+        // Update UI Elements
+        if (dashing > 0)
+        {
+            dashUI.SetActive(true);
+        }
+        else
+        {
+            dashUI.SetActive(false);
+        }
+        dashBar.fillAmount = dashMult / dashCeiling;
+
+        // Update current state
+        currentState.UpdateState(this);
     }
 
     void FixedUpdate()
@@ -62,13 +102,13 @@ public class MovementManager : MonoBehaviour
         currentState.FixedUpdateState(this);
 
         // apply gravity
-        rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
+        //rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
         //Debug.Log(rb.linearVelocity.y);
 
-        if (rb.linearVelocity.y < maxGravity)
+        /*if (rb.linearVelocity.y < maxGravity)
         {
             rb.linearVelocity = new Vector3(0, maxGravity, 0);
-        }
+        }*/
     }
 
     // Transsition to a new state
@@ -76,5 +116,17 @@ public class MovementManager : MonoBehaviour
     {
         currentState = state;
         currentState.EnterState(this);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

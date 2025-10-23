@@ -10,22 +10,27 @@ public class IdleState : MovementBaseState
         //Debug.Log("Entering Idle State");
 
         // Stop player movement
-        player.rb.linearVelocity = new Vector3(0, player.rb.linearVelocity.y, 0);
-        player.rb.angularVelocity = new Vector3(0, player.rb.angularVelocity.y, 0);
+        player.rb.linearVelocity = Vector3.zero;
+        player.rb.angularVelocity = Vector3.zero;
     }
 
     public override void UpdateState(MovementManager player)
     {
 
-        if (player.playerBounce.IsPressed())
+        /*if (player.playerBounce.IsPressed())
         {
             player.SwitchState(player.bounceState);
-        }
+        }*/
 
         // Idle state logic
-        if (player.moveDirection != Vector2.zero)
+        if (player.moveDirection != Vector3.zero)
         {
             player.SwitchState(player.moveState);
+        }
+
+        if (player.dashing > 0)
+        {
+            player.SwitchState(player.dashState);
         }
     }
 
