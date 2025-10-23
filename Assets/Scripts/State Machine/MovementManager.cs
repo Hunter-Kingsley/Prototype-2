@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MovementManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MovementManager : MonoBehaviour
     private InputActionMap playerActionMap;
     private InputAction moveAction;
     private InputAction dashAction;
+    private InputAction escapeAction;
     //private InputAction playerBounce;
 
     // Get UI Elements
@@ -42,12 +44,14 @@ public class MovementManager : MonoBehaviour
     //public float bounceStrength = 5.0f;
     //public float bounceCooldown = 0.25f;
     //public float bounceTimer = 0.0f;
+    public string titleScene;
 
     void Awake()
     {
         playerActionMap = inputActions.FindActionMap("Player");
         moveAction = playerActionMap.FindAction("Move");
         dashAction = playerActionMap.FindAction("Dash");
+        escapeAction = playerActionMap.FindAction("Exit");
     }
 
     // Enable/Disable player controls
@@ -94,6 +98,12 @@ public class MovementManager : MonoBehaviour
 
         // Update current state
         currentState.UpdateState(this);
+
+        if (escapeAction.ReadValue<float>() > 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(titleScene);
+        }
     }
 
     void FixedUpdate()
