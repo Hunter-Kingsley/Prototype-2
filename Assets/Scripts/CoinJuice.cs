@@ -18,13 +18,22 @@ public class CoinJuice : MonoBehaviour
     {
 
         transform.Rotate(rotationSpeed * Time.deltaTime);
-        
+
 
         //bobble effect?
         float newY = startPosition.y + (Mathf.Sin(Time.time * floatSpeed) * floatStrength);
 
         // Update the object's position
         transform.position = new Vector3(startPosition.x, newY, startPosition.z);
-       
+
+    }
+    
+    // Collect coin
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
