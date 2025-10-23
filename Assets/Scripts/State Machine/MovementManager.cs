@@ -68,6 +68,7 @@ public class MovementManager : MonoBehaviour
     void Start()
     {   
         // Starting state for the player
+        Cursor.lockState = CursorLockMode.Locked;
         currentState = idleState;
         currentState.EnterState(this); 
     }
