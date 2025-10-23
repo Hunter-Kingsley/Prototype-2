@@ -7,7 +7,7 @@ public class BounceState : MovementBaseState
 
     public override void EnterState(MovementManager player)
     {
-        //Debug.Log("Entering Bounce State");
+        /*//Debug.Log("Entering Bounce State");
 
         if (player.bounceTimer > player.bounceCooldown)
         {
@@ -22,12 +22,12 @@ public class BounceState : MovementBaseState
             {
                 player.SwitchState(player.idleState);
             }
-        }
+        }*/
     }
 
     public override void UpdateState(MovementManager player)
     {
-        // Bounce state logic
+        /*// Bounce state logic
         if (player.moveDirection != Vector2.zero)
         {
             player.SwitchState(player.moveState);
@@ -35,12 +35,12 @@ public class BounceState : MovementBaseState
         else
         {
             player.SwitchState(player.idleState);
-        }
+        }*/
     }
 
     public override void FixedUpdateState(MovementManager player)
     {
-        // Bounce physics logic
+        /*// Bounce physics logic
 
         // apply gravity
         player.rb.AddForce(new Vector3(0, player.gravityValue, 0), ForceMode.Acceleration);
@@ -49,7 +49,7 @@ public class BounceState : MovementBaseState
         if (player.rb.linearVelocity.y < player.maxGravity)
         {
             player.rb.linearVelocity = new Vector3(0, player.maxGravity, 0);
-        }
+        }*/
     }
 
     public override void OnCollisionEnter(MovementManager player)
