@@ -1162,8 +1162,7 @@ MonoBehaviour:
 
     Vertical Movement:
 
-    Up:
-    Spacebar
+    Up: Spacebar
 
     Down: Shift / Ctrl
 
@@ -3139,19 +3138,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: '- Movement Scripting - Hunter Kingsley / Andrew Degan
 
-    - Environment
-    Design - Alfredo Barragan
+    - Environment Design - Alfredo Barragan
 
     - Player Visuals: Andrew Degan
 
-    - Quality
-    Assurance: Reece Talaro
+    - Quality Assurance: Reece Talaro
 
 
     --Additional Assets--
 
-    - Background Image -
-    PBS Studio
+    - Background Image - PBS Studio
 
     - Unity Pro Builder'
   m_isRightToLeft: 0
@@ -3368,6 +3364,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999193717}
   m_CullTransparentMesh: 1
+--- !u!114 &2068028840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068028837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.07058824}
+    m_HighlightedColor: {r: 0.4539427, g: 0.8890355, b: 0.9528302, a: 0.2901961}
+    m_PressedColor: {r: 0.32872015, g: 0.49390095, b: 0.8396226, a: 0.19215687}
+    m_SelectedColor: {r: 0.7242346, g: 0.7937185, b: 0.990566, a: 0.21176471}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.078431375}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2068028841}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2068028839}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_MethodName: TaskChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: WorldScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2121534257
 GameObject:
   m_ObjectHideFlags: 0
