@@ -9,9 +9,9 @@ public class IdleState : MovementBaseState
     {
         //Debug.Log("Entering Idle State");
 
-        // Stop player movement
-        player.rb.linearVelocity = Vector3.zero;
-        player.rb.angularVelocity = Vector3.zero;
+        // Apply Drag on the X and Z axis to the player
+        //player.rb.linearVelocity = Vector3.zero;
+        //player.rb.angularVelocity = Vector3.zero;
     }
 
     public override void UpdateState(MovementManager player)

@@ -39,11 +39,12 @@ public class MovementManager : MonoBehaviour
     public float dashSlowdown = .5f;
     public float horizontalMoveSpeed = 5f;
     public float verticalMoveSpeed = 5f;
-    //public float gravityValue = -5.0f;
-    //public float maxGravity = -7.0f;
+    public float gravityValue = -5.0f;
+    public float maxGravity = -7.0f;
     //public float bounceStrength = 5.0f;
     //public float bounceCooldown = 0.25f;
     //public float bounceTimer = 0.0f;
+    public float dragValue = 1.0f;
     public string titleScene;
 
     void Awake()
@@ -70,7 +71,9 @@ public class MovementManager : MonoBehaviour
         // Starting state for the player
         Cursor.lockState = CursorLockMode.Locked;
         currentState = idleState;
-        currentState.EnterState(this); 
+        currentState.EnterState(this);
+
+        rb.linearDamping = dragValue;
     }
 
     // Update is called once per frame
@@ -112,14 +115,7 @@ public class MovementManager : MonoBehaviour
         // You can add physics-related state updates here if needed
         currentState.FixedUpdateState(this);
 
-        // apply gravity
-        //rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
-        //Debug.Log(rb.linearVelocity.y);
-
-        /*if (rb.linearVelocity.y < maxGravity)
-        {
-            rb.linearVelocity = new Vector3(0, maxGravity, 0);
-        }*/
+        ApplyGravity();
     }
 
     // Transition to a new state
@@ -138,6 +134,18 @@ public class MovementManager : MonoBehaviour
         else
         {
             Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public void ApplyGravity()
+    {
+        // apply gravity
+        rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
+        //Debug.Log(rb.linearVelocity.y);
+
+        if (rb.linearVelocity.y < maxGravity)
+        {
+            rb.linearVelocity = new Vector3(0, maxGravity, 0);
         }
     }
 }
