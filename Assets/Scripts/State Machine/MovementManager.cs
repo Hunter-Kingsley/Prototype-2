@@ -84,11 +84,6 @@ public class MovementManager : MonoBehaviour
             bounceTimer += Time.deltaTime;
         }*/
 
-        // Get control inputs
-        moveDirection = moveAction.ReadValue<Vector3>();
-        moveDirection = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * moveDirection;
-        dashing = dashAction.ReadValue<float>();
-
         // Update UI Elements
         if (dashing > 0)
         {
@@ -108,14 +103,22 @@ public class MovementManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(titleScene);
         }
+
     }
 
     void FixedUpdate()
     {
         // You can add physics-related state updates here if needed
+        // Get control inputs
+        moveDirection = moveAction.ReadValue<Vector3>();
+        Debug.Log(moveDirection);
+        moveDirection = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * moveDirection;
+        Debug.Log(moveDirection);
+        dashing = dashAction.ReadValue<float>();
+
         currentState.FixedUpdateState(this);
 
-        ApplyGravity();
+        //ApplyGravity();
     }
 
     // Transition to a new state

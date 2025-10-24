@@ -45,11 +45,11 @@ public class MoveState : MovementBaseState
     public override void FixedUpdateState(MovementManager player)
     {
         // Move physics logic
-        player.rb.linearVelocity = new Vector3(
+        player.rb.AddForce(new Vector3(
             player.moveDirection.x * (player.horizontalMoveSpeed * player.dashMult),
-            player.moveDirection.y * (player.verticalMoveSpeed * player.dashMult),
+            0,
             player.moveDirection.z * (player.horizontalMoveSpeed * player.dashMult)
-            );
+            ), ForceMode.Acceleration);
     }
 
     public override void OnCollisionEnter(MovementManager player)
