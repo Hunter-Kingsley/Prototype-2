@@ -17,10 +17,10 @@ public class IdleState : MovementBaseState
     public override void UpdateState(MovementManager player)
     {
 
-        /*if (player.playerBounce.IsPressed())
+        if (player.jumpAction.WasPressedThisFrame())
         {
-            player.SwitchState(player.bounceState);
-        }*/
+            player.rb.AddForce(new Vector3(0, player.bounceStrength, 0), ForceMode.Impulse);
+        }
 
         // Idle state logic
         if (player.moveDirection != Vector3.zero)

@@ -24,6 +24,7 @@ public class MovementManager : MonoBehaviour
     private InputAction moveAction;
     private InputAction dashAction;
     private InputAction escapeAction;
+    public InputAction jumpAction;
     //private InputAction playerBounce;
 
     // Get UI Elements
@@ -41,7 +42,7 @@ public class MovementManager : MonoBehaviour
     public float verticalMoveSpeed = 5f;
     public float gravityValue = -5.0f;
     public float maxGravity = -7.0f;
-    //public float bounceStrength = 5.0f;
+    public float bounceStrength = 10.0f;
     //public float bounceCooldown = 0.25f;
     //public float bounceTimer = 0.0f;
     public float dragValue = 1.0f;
@@ -52,6 +53,7 @@ public class MovementManager : MonoBehaviour
         playerActionMap = inputActions.FindActionMap("Player");
         moveAction = playerActionMap.FindAction("Move");
         dashAction = playerActionMap.FindAction("Dash");
+        jumpAction = playerActionMap.FindAction("Jump");
         escapeAction = playerActionMap.FindAction("Exit");
     }
 
@@ -118,7 +120,10 @@ public class MovementManager : MonoBehaviour
 
         currentState.FixedUpdateState(this);
 
-        //ApplyGravity();
+        if (jumpAction.WasPressedThisFrame())
+        {
+            rb.AddForce(new Vector3(0, bounceStrength, 0), ForceMode.Impulse);
+        }
     }
 
     // Transition to a new state
@@ -137,18 +142,6 @@ public class MovementManager : MonoBehaviour
         else
         {
             Cursor.lockState = CursorLockMode.None;
-        }
-    }
-
-    public void ApplyGravity()
-    {
-        // apply gravity
-        rb.AddForce(new Vector3(0, gravityValue, 0), ForceMode.Acceleration);
-        //Debug.Log(rb.linearVelocity.y);
-
-        if (rb.linearVelocity.y < maxGravity)
-        {
-            rb.linearVelocity = new Vector3(0, maxGravity, 0);
         }
     }
 }
